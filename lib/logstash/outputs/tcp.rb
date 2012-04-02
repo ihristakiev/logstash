@@ -103,9 +103,15 @@ class LogStash::Outputs::Tcp < LogStash::Outputs::Base
         @client_socket.write(event.to_hash.to_json)
         @client_socket.write("\n")
       rescue => e
-        @logger.warn("tcp output exception", :host => @host, :port => @port,
-                     :exception => e, :backtrace => e.backtrace)
-        @client_socket = nil
+        if terminating?
+          return
+        else
+          @logger.warn("tcp output exception", :host => @host, :port => @port,
+                       :exception => e, :backtrace => e.backtrace)
+          @client_socket = nil
+          sleep(1)
+          retry
+        end
       end
     end
   end # def receive
