@@ -64,14 +64,13 @@ class LogStash::Outputs::Gelf < LogStash::Outputs::Base
     @gelf.level = 0
 
     @level_map = {
-      "debug" => 0, "d" => 0, "config" => 0, "fine" => 0, "finer" => 0, "finest" =>0,
-      "info" => 1, "i" => 1,
+      "debug" => 0, "d" => 0, "config" => 0, "fine" => 0, "finer" => 0, "finest" =>0, "trace_int" => 0, "trace" => 0, "off" => 0, "all" => 0,
+      "info" => 1, "i" => 1, "informational" => 1,
       "warn" => 3, "w" => 3, "warning"=> 3,
       "error" => 4, "e" => 4,
-      "fatal" => 5, "f" => 5, "severe" => 5, 
+      "fatal" => 5, "f" => 5, "severe" => 5, "alert" => 5, "critical" =>5,
       "unknown" => 3, "u" => 3,
-      "emerg" => 5,
-      "trace_int" => 0, "trace" => 0, "off" => 0, "all" => 0
+      "emerg" => 5, "emergency" => 5
     }
   end # def register
 
